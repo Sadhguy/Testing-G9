@@ -1,11 +1,15 @@
 require './Tablero.rb'
+require './Juego.rb'
 
 if __FILE__ == $0
-    difs = [7, 14, 21]
+    puts "Nombre jugador 1:"
+    jug1 = gets
+    puts "Nombre jugador 2:"
+    jug2 = gets
     puts "Elige una dificultad (1, 2 ó 3):"
     dif = gets
-    tablero = Tablero.new
-    tablero.lado = difs[dif.to_i()-1]
-    tablero.crear_tablero
-    tablero.print_tablero
+    juego = Juego.new(dif, jug1, jug2)
+    while juego.vivo
+        juego.turno
+    end
 end
