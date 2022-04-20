@@ -58,7 +58,7 @@ class Tablero
                 return [true, [f+1, c+1]]
             else
                 puts "Casilla no disponible"
-                return false
+                return [false]
             end
 
         end
@@ -70,6 +70,11 @@ class Tablero
         col1 = @letras.find_index(col1.upcase)
         col2 = @letras.find_index(col2.upcase)
         tablero_provisional = self
+        if !((0..(@lado-1)).include?  col1) || !((0..(@lado-1)).include? fil1) || \
+           !((0..(@lado-1)).include?  col2) || !((0..(@lado-1)).include? fil2) 
+            puts "Casilla invalida"
+            return [false]
+        end
         if col1 == col2
             fils = 0
             cas = []
@@ -80,7 +85,7 @@ class Tablero
                     cas.push([fil1+1+i, col1+1])
                 else
                     puts "No es posible colocar el barco en esa posición"
-                    return false
+                    return [false]
                 end
             end
             if fils == largo
@@ -88,7 +93,7 @@ class Tablero
                 return [true, cas]
             else
                 puts "No es posible colocar el barco en esa posición"
-                return false
+                return [false]
             end
         elsif fil1 == fil2
             cols = 0
@@ -100,7 +105,7 @@ class Tablero
                     cas.push([fil1+1, col1+1+i])
                 else
                     puts "No es posible colocar el barco en esa posición"
-                    return false
+                    return [false]
                 end
             end
             if cols == largo
@@ -108,11 +113,11 @@ class Tablero
                 return [true, cas]
             else
                 puts "No es posible colocar el barco en esa posición"
-                return false
+                return [false]
             end
         else
             puts "No puedes colocar los barcos de forma diagonal"
-            return false
+            return [false]
         end
     end
 end

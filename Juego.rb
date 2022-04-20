@@ -6,20 +6,27 @@ class Juego
     attr_accessor :jugador2
     attr_accessor :vivo
 
-    def initialize(dif, jug1, jug2)
+    def initialize(dif, jug1, jug2, mod)
         @jugador1 = Jugador.new(dif, jug1)
         @jugador2 = Jugador.new(dif, jug2)
         @turno = @jugador1
         @noturno = @jugador2
         @vivo = true
+        @mod = mod
     end
 
     def turno
         puts "**********\nTurno de "+@turno.nombre+"**********"
         breaker = true
         while breaker
-            if @turno.disparar(@noturno)
-                breaker = false
+            if @mod == 2 && @turno == @jugador2
+                if @turno.disparar_IA(@noturno)
+                    breaker = false
+                end
+            else
+                if @turno.disparar(@noturno)
+                    breaker = false
+                end
             end
         end
         revisar_jugador
