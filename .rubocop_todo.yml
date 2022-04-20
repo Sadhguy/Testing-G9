@@ -32,49 +32,49 @@ Metrics/PerceivedComplexity:
   Max: 14
 
 # Offense count: 1
-Naming/AccessorMethodName:
-  Exclude:
-    - 'Jugador.rb'
+# Naming/AccessorMethodName:
+#   Exclude:
+#     - 'Jugador.rb'
 
-# Offense count: 4
-# Configuration parameters: ExpectMatchingDefinition, CheckDefinitionPathHierarchy, CheckDefinitionPathHierarchyRoots, Regex, IgnoreExecutableScripts, AllowedAcronyms.
-# CheckDefinitionPathHierarchyRoots: lib, spec, test, src
-# AllowedAcronyms: CLI, DSL, ACL, API, ASCII, CPU, CSS, DNS, EOF, GUID, HTML, HTTP, HTTPS, ID, IP, JSON, LHS, QPS, RAM, RHS, RPC, SLA, SMTP, SQL, SSH, TCP, TLS, TTL, UDP, UI, UID, UUID, URI, URL, UTF8, VM, XML, XMPP, XSRF, XSS
-Naming/FileName:
-  Exclude:
-    - 'Barco.rb'
-    - 'Juego.rb'
-    - 'Jugador.rb'
-    - 'Tablero.rb'
+# # Offense count: 4
+# # Configuration parameters: ExpectMatchingDefinition, CheckDefinitionPathHierarchy, CheckDefinitionPathHierarchyRoots, Regex, IgnoreExecutableScripts, AllowedAcronyms.
+# # CheckDefinitionPathHierarchyRoots: lib, spec, test, src
+# # AllowedAcronyms: CLI, DSL, ACL, API, ASCII, CPU, CSS, DNS, EOF, GUID, HTML, HTTP, HTTPS, ID, IP, JSON, LHS, QPS, RAM, RHS, RPC, SLA, SMTP, SQL, SSH, TCP, TLS, TTL, UDP, UI, UID, UUID, URI, URL, UTF8, VM, XML, XMPP, XSRF, XSS
+# Naming/FileName:
+#   Exclude:
+#     - 'Barco.rb'
+#     - 'Juego.rb'
+#     - 'Jugador.rb'
+#     - 'Tablero.rb'
 
-# Offense count: 3
-# Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
-# AllowedNames: at, by, db, id, in, io, ip, of, on, os, pp, to
-Naming/MethodParameterName:
-  Exclude:
-    - 'Tablero.rb'
+# # Offense count: 3
+# # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
+# # AllowedNames: at, by, db, id, in, io, ip, of, on, os, pp, to
+# Naming/MethodParameterName:
+#   Exclude:
+#     - 'Tablero.rb'
 
-# Offense count: 4
-# Configuration parameters: AllowedConstants.
-Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'Barco.rb'
-    - 'Juego.rb'
-    - 'Jugador.rb'
-    - 'Tablero.rb'
+# # Offense count: 4
+# # Configuration parameters: AllowedConstants.
+# Style/Documentation:
+#   Exclude:
+#     - 'spec/**/*'
+#     - 'test/**/*'
+#     - 'Barco.rb'
+#     - 'Juego.rb'
+#     - 'Jugador.rb'
+#     - 'Tablero.rb'
 
-# Offense count: 3
-# Configuration parameters: MinBodyLength.
-Style/GuardClause:
-  Exclude:
-    - 'Barco.rb'
-    - 'Juego.rb'
-    - 'Tablero.rb'
+# # Offense count: 3
+# # Configuration parameters: MinBodyLength.
+# Style/GuardClause:
+#   Exclude:
+#     - 'Barco.rb'
+#     - 'Juego.rb'
+#     - 'Tablero.rb'
 
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-Style/NestedModifier:
-  Exclude:
-    - 'Juego.rb'
+# # Offense count: 1
+# # This cop supports safe auto-correction (--auto-correct).
+# Style/NestedModifier:
+#   Exclude:
+#     - 'Juego.rb'
