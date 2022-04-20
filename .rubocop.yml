@@ -1,9 +1,9 @@
 
-AllCops:
-  Exclude:
-    # - 'spec/**/*'
-    # - 'test/**/*'
-    - 'Barco.rb'
-    - 'Juego.rb'
-    - 'Jugador.rb'
-    - 'Tablero.rb'
+# AllCops:
+#   Exclude:
+#     # - 'spec/**/*'
+#     # - 'test/**/*'
+#     - 'Barco.rb'
+#     - 'Juego.rb'
+#     - 'Jugador.rb'
+#     - 'Tablero.rb'
