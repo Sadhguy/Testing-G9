@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require './Tablero'
 require './Juego'
 
-if __FILE__ == $0
+if __FILE__ == $PROGRAM_NAME
   puts 'Nombre jugador 1:'
   jug1 = gets
   puts 'Nombre jugador 2:'

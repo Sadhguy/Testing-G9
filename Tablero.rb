@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tablero
   attr_accessor :casillas
 
@@ -13,10 +15,10 @@ class Tablero
     cont = 0
     let = @letras.take(@lado)
     tablero.push(let)
-    for f in 1..@lado
+    (1..@lado).each do |_f|
       fil = []
-      for c in 0..(@lado - 1)
-        fil.push(cont) if c == 0
+      (0..(@lado - 1)).each do |c|
+        fil.push(cont) if c.zero?
         fil.push(0)
       end
       cont += 1
@@ -26,17 +28,18 @@ class Tablero
   end
 
   def print_tablero
-    for f in 0..@lado
+    (0..@lado).each do |f|
       p @casillas[f]
     end
   end
 
   def pintar_casilla(f, c, i)
-    if i == 1
+    case i
+    when 1
       @casillas[f][c] = 'X'
-    elsif i == 2
+    when 2
       @casillas[f][c] = 'o'
-    elsif i == 3
+    when 3
       @casillas[f][c] = '#'
     end
   end
@@ -45,11 +48,12 @@ class Tablero
     f = fil.to_i
     if (@letras.include? col.upcase) && ((0..(@lado - 1)).include? f)
       c = @letras.find_index(col.upcase)
-      if @casillas[f + 1][c + 1] == 0
+      case @casillas[f + 1][c + 1]
+      when 0
         pintar_casilla(f + 1, c + 1, 2)
         puts '**********AGUA!**********'
         [true, [f + 1, c + 1]]
-      elsif @casillas[f + 1][c + 1] == '#'
+      when '#'
         pintar_casilla(f + 1, c + 1, 1)
         puts '**********FUEGO!**********'
         [true, [f + 1, c + 1]]
@@ -70,8 +74,8 @@ class Tablero
     if col1 == col2
       fils = 0
       cas = []
-      for i in (0..(largo - 1))
-        if @casillas[fil1 + 1 + i][col1 + 1] == 0
+      (0..(largo - 1)).each do |i|
+        if (@casillas[fil1 + 1 + i][col1 + 1]).zero?
           fils += 1
           tablero_provisional.pintar_casilla(fil1 + 1 + i, col1 + 1, 3)
           cas.push([fil1 + 1 + i, col1 + 1])
@@ -90,8 +94,8 @@ class Tablero
     elsif fil1 == fil2
       cols = 0
       cas = []
-      for i in (0..(largo - 1))
-        if @casillas[fil1 + 1][col1 + 1 + i] == 0
+      (0..(largo - 1)).each do |i|
+        if (@casillas[fil1 + 1][col1 + 1 + i]).zero?
           cols += 1
           tablero_provisional.pintar_casilla(fil1 + 1, col1 + 1 + i, 3)
           cas.push([fil1 + 1, col1 + 1 + i])

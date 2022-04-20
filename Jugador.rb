@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './Tablero'
 require './Barco'
 
@@ -24,7 +26,7 @@ class Jugador
   end
 
   def colocar_barcos
-    puts "**********\nTurno de " + nombre + '**********'
+    puts "**********\nTurno de #{nombre}**********"
     colocados = 0
     @tablero_privado.print_tablero
     while colocados < @cant_barcos
@@ -45,8 +47,8 @@ class Jugador
 
   def rectificar_tableros
     puts 'Rectificado'
-    for f in 1..@lado
-      for c in 1..(@lado - 1)
+    (1..@lado).each do |f|
+      (1..(@lado - 1)).each do |c|
         @tablero.casillas[f][c] = @tablero_privado.casillas[f][c] if @tablero_privado.casillas[f][c] != '#'
       end
     end
@@ -57,7 +59,7 @@ class Jugador
   end
 
   def get_tablero
-    puts "**********\nTablero de " + @nombre + '**********'
+    puts "**********\nTablero de #{@nombre}**********"
     @tablero.print_tablero
   end
 

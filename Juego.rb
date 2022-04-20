@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './Tablero'
 require './Jugador'
 
@@ -13,7 +15,7 @@ class Juego
   end
 
   def turno
-    puts "**********\nTurno de " + @turno.nombre + '**********'
+    puts "**********\nTurno de #{@turno.nombre}**********"
     breaker = true
     breaker = false if @turno.disparar(@noturno) while breaker
     revisar_jugador
@@ -35,7 +37,7 @@ class Juego
 
   def revisar_jugador
     h = 0
-    for b in @noturno.barcos
+    @noturno.barcos.each do |b|
       h += 1 unless b.vivo
     end
     terminar_juego if h == @noturno.cant_barcos
