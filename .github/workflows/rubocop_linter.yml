@@ -2,8 +2,9 @@ name: Rubocop Linter
 
 on:
   push:
-    branches:
+    branches-ignore:
       - master
+
 
 jobs:
   lint:
