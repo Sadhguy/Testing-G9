@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require './Tablero'
-require './Jugador'
+require './tablero'
+require './jugador'
 
+# Clase que modela la logica del juego
 class Juego
   attr_accessor :jugador1, :jugador2, :vivo
 
@@ -15,21 +16,21 @@ class Juego
     @mod = mod
   end
 
-  def turno
+  def turno # rubocop:disable Metrics/MethodLength
     puts "**********\nTurno de #{@turno.nombre}**********"
     breaker = true
     while breaker
       if @mod == 2 && @turno == @jugador2
-        breaker = false if @turno.disparar_IA(@noturno)
+        breaker = false if @turno.disparar_ia(@noturno)
       elsif @turno.disparar(@noturno)
         breaker = false
       end
     end
     revisar_jugador
-    if vivo
-      @noturno.get_tablero
-      terminar_turno
-    end
+    return unless vivo
+
+    @noturno.obtener_tablero
+    terminar_turno
   end
 
   def terminar_turno
