@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Clase que modela los barcos del juego
 class Barco
   attr_accessor :largo, :casillas, :vivo
 
@@ -12,10 +13,10 @@ class Barco
 
   def recibir_disparo
     @vida -= 1
-    if @vida.zero?
-      @vivo = false
-      puts '**********BARCO HUNDIDO!**********'
-    end
+    return unless @vida.zero?
+
+    @vivo = false
+    puts '**********BARCO HUNDIDO!**********'
   end
 
   def revisar_disparo(fil, col)

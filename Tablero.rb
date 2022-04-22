@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Tablero
+# Clase que modela el tablero
+class Tablero # rubocop:disable Metrics/ClassLength
   attr_accessor :casillas
 
   def initialize(lado)
@@ -10,7 +11,7 @@ class Tablero
     @casillas = crear_tablero
   end
 
-  def crear_tablero
+  def crear_tablero # rubocop:disable Metrics/MethodLength
     tablero = []
     cont = 0
     let = @letras.take(@lado)
@@ -44,28 +45,27 @@ class Tablero
     end
   end
 
-  def revisar_casilla(fil, col)
+  def revisar_casilla(fil, col) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     f = fil.to_i
-    if (@letras.include? col.upcase) && ((0..(@lado - 1)).include? f)
-      c = @letras.find_index(col.upcase)
-      case @casillas[f + 1][c + 1]
-      when 0
-        pintar_casilla(f + 1, c + 1, 2)
-        puts '**********AGUA!**********'
-        [true, [f + 1, c + 1]]
-      when '#'
-        pintar_casilla(f + 1, c + 1, 1)
-        puts '**********FUEGO!**********'
-        [true, [f + 1, c + 1]]
-      else
-        puts 'Casilla no disponible'
-        [false]
-      end
+    return unless (@letras.include? col.upcase) && ((0..(@lado - 1)).include? f)
 
+    c = @letras.find_index(col.upcase)
+    case @casillas[f + 1][c + 1]
+    when 0
+      pintar_casilla(f + 1, c + 1, 2)
+      puts '**********AGUA!**********'
+      [true, [f + 1, c + 1]]
+    when '#'
+      pintar_casilla(f + 1, c + 1, 1)
+      puts '**********FUEGO!**********'
+      [true, [f + 1, c + 1]]
+    else
+      puts 'Casilla no disponible'
+      [false]
     end
   end
 
-  def revisar_para_barcos(col1, fil1, col2, fil2, largo)
+  def revisar_para_barcos(col1, fil1, col2, fil2, largo) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     fil1 = fil1.to_i
     fil2 = fil2.to_i
     col1 = @letras.find_index(col1.upcase)

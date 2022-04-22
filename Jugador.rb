@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-require './Tablero'
-require './Barco'
+require './tablero'
+require './barco'
 
-class Jugador
+# Clase que modela al Jugador del juego
+class Jugador # rubocop:disable Metrics/ClassLength
   attr_accessor :nombre, :tablero, :tablero_privado, :barcos, :cant_barcos
 
   def initialize(dif, nombre)
@@ -24,7 +25,7 @@ class Jugador
     @barcos = barcos
   end
 
-  def colocar_barcos
+  def colocar_barcos # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     puts "**********\nTurno de #{nombre}**********"
     colocados = 0
     @tablero_privado.print_tablero
@@ -44,7 +45,7 @@ class Jugador
     end
   end
 
-  def colocar_barcos_IA
+  def colocar_barcos_ia # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     puts "**********\nTurno de IA\n**********"
     puts "**********\nMe llamo inteligencia artificial pero soy bastante tontx\n**********"
     colocados = 0
@@ -84,7 +85,7 @@ class Jugador
     end
   end
 
-  def get_tablero
+  def obtener_tablero
     puts "**********\nTablero de #{@nombre}**********"
     @tablero.print_tablero
   end
@@ -102,7 +103,7 @@ class Jugador
     end
   end
 
-  def disparar_IA(jugador)
+  def disparar_ia(jugador) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     puts 'Inserte casilla a disparar (Ej: A0):'
     randcol = ('A'..'Z').to_a
     randc = rand(@lado)

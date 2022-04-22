@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require './Tablero'
-require './Juego'
+require './tablero'
+require './juego'
 
 if __FILE__ == $PROGRAM_NAME
   puts 'Nombre jugador 1:'
@@ -21,7 +21,7 @@ if __FILE__ == $PROGRAM_NAME
   juego = Juego.new(dif, jug1, jug2, mod)
   juego.jugador1.colocar_barcos
   if mod == 2
-    juego.jugador2.colocar_barcos_IA
+    juego.jugador2.colocar_barcos_ia
   else
     juego.jugador2.colocar_barcos
   end
