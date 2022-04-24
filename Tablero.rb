@@ -19,7 +19,7 @@ class Tablero # rubocop:disable Metrics/ClassLength
     (1..@lado).each do |_f|
       fil = []
       (0..(@lado - 1)).each do |c|
-        fil.push(cont) if c.zero?
+        fil.push(cont) if c == 0 # rubocop:disable Style/NumericPredicate
         fil.push(0)
       end
       cont += 1
@@ -80,7 +80,7 @@ class Tablero # rubocop:disable Metrics/ClassLength
       fils = 0
       cas = []
       (0..(largo - 1)).each do |i|
-        if (@casillas[fil1 + 1 + i][col1 + 1]).zero?
+        if (@casillas[fil1 + 1 + i][col1 + 1]) == 0 # rubocop:disable Style/NumericPredicate
           fils += 1
           tablero_provisional.pintar_casilla(fil1 + 1 + i, col1 + 1, 3)
           cas.push([fil1 + 1 + i, col1 + 1])
@@ -100,7 +100,7 @@ class Tablero # rubocop:disable Metrics/ClassLength
       cols = 0
       cas = []
       (0..(largo - 1)).each do |i|
-        if (@casillas[fil1 + 1][col1 + 1 + i]).zero?
+        if (@casillas[fil1 + 1][col1 + 1 + i]) == 0 # rubocop:disable Style/NumericPredicate
           cols += 1
           tablero_provisional.pintar_casilla(fil1 + 1, col1 + 1 + i, 3)
           cas.push([fil1 + 1, col1 + 1 + i])
