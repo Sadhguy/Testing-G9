@@ -57,7 +57,7 @@ class Jugador # rubocop:disable Metrics/ClassLength
       randc = rand(@lado - @barcos[colocados].largo - 1)
       randfil = rand(0..(@lado - @barcos[colocados].largo))
       randy = rand(2)
-      cas = if randy.zero?
+      cas = if randy == 0 # rubocop:disable Style/NumericPredicate
               randcol[randc] + randfil.to_s + randcol[randc] + \
                 (randfil + @barcos[colocados].largo - 1).to_s
             else
@@ -103,20 +103,18 @@ class Jugador # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def disparar_ia(jugador) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  def disparar_ia(jugador) # rubocop:disable Metrics/AbcSize
     puts 'Inserte casilla a disparar (Ej: A0):'
     randcol = ('A'..'Z').to_a
     randc = rand(@lado)
     randfil = rand(@lado)
     cas = randcol[randc] + randfil.to_s
     respuesta = jugador.tablero_privado.revisar_casilla(cas[1], cas[0])
-    if respuesta[0]
-      jugador.rectificar_tableros
-      jugador.actualizar_barcos(respuesta[1][0], respuesta[1][1])
-      true
-    else
-      false
-    end
+    return unless respuesta[0]
+
+    jugador.rectificar_tableros
+    jugador.actualizar_barcos(respuesta[1][0], respuesta[1][1])
+    true
   end
 
   def actualizar_barcos(fil, col)
