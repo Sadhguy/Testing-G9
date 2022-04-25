@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+
       - name: Set up Ruby
         uses: actions/setup-ruby@v1
         with:
@@ -61,7 +61,7 @@ jobs:
           bundler install
       
       - name: Run tests
-        # run: bundle exec rake
+        run: bundle exec rake
       # - name: Upload coverage results    
       #   uses: actions/upload-artifact@master
       #   if: always()
