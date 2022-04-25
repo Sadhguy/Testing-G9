@@ -4,10 +4,8 @@ env:
   POSTGRES_PASSWORD: postgres
   POSTGRES_DB: postgres
 
-name: Rails tests
-on: [push,pull_request]
-jobs:
-  name: General Testing
+name: CI
+
 on:
   pull_request:
     branches: ["main"]
