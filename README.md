@@ -6,3 +6,4 @@
 1) Clonar repositorio
 2) Entrar a la carpeta del repositorio
 3) Correr ruby main.rb
+4) Disfrutar
