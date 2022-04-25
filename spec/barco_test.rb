@@ -22,7 +22,7 @@ describe Barco do # rubocop:disable Metrics/BlockLength
     it 'should print a message if Barco is sunk' do
       barco_disparado = Barco.new(largo)
       barco_disparado.recibir_disparo
-      expect(barco_disparado.vivo).to eq TRUE
+      expect(barco_disparado.vivo).to eq true
       barco_disparado.recibir_disparo
       barco_disparado.recibir_disparo
       barco_disparado.recibir_disparo
@@ -30,7 +30,7 @@ describe Barco do # rubocop:disable Metrics/BlockLength
         barco_disparado.recibir_disparo
       end.to output('**********BARCO HUNDIDO!**********
 ').to_stdout
-      expect(barco_disparado.vivo).to eq FALSE
+      expect(barco_disparado.vivo).to eq false
     end
   end
 
@@ -39,7 +39,7 @@ describe Barco do # rubocop:disable Metrics/BlockLength
       barco_revisado = Barco.new(1)
       barco_revisado.casillas = casilla
       barco_revisado.revisar_disparo(fila, columna)
-      expect(barco_revisado.vivo).to eq FALSE
+      expect(barco_revisado.vivo).to eq false
     end
   end
 end

@@ -2,7 +2,7 @@
 
 # Clase que modela el tablero
 class Tablero # rubocop:disable Metrics/ClassLength
-  attr_accessor :casillas
+  attr_accessor :casillas, :lado, :letras
 
   def initialize(lado)
     @lado = lado
@@ -80,7 +80,7 @@ class Tablero # rubocop:disable Metrics/ClassLength
       fils = 0
       cas = []
       (0..(largo - 1)).each do |i|
-        if (@casillas[fil1 + 1 + i][col1 + 1]) == 0 # rubocop:disable Style/NumericPredicate
+        if @casillas[fil1 + 1 + i][col1 + 1] == 0 # rubocop:disable Style/NumericPredicate
           fils += 1
           tablero_provisional.pintar_casilla(fil1 + 1 + i, col1 + 1, 3)
           cas.push([fil1 + 1 + i, col1 + 1])
@@ -100,7 +100,7 @@ class Tablero # rubocop:disable Metrics/ClassLength
       cols = 0
       cas = []
       (0..(largo - 1)).each do |i|
-        if (@casillas[fil1 + 1][col1 + 1 + i]) == 0 # rubocop:disable Style/NumericPredicate
+        if @casillas[fil1 + 1][col1 + 1 + i] == 0 # rubocop:disable Style/NumericPredicate
           cols += 1
           tablero_provisional.pintar_casilla(fil1 + 1, col1 + 1 + i, 3)
           cas.push([fil1 + 1, col1 + 1 + i])
