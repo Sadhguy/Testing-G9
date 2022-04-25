@@ -44,8 +44,11 @@ jobs:
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-ruby@v1
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Ruby
+        uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
 
