@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require './tablero'
-require './jugador'
+require './Tablero'
+require './Jugador'
 
 # Clase que modela la logica del juego
 class Juego
-  attr_accessor :jugador1, :jugador2, :vivo
+  attr_accessor :jugador1, :jugador2, :vivo, :turno, :noturno, :mod
 
   def initialize(dif, jug1, jug2, mod)
     @jugador1 = Jugador.new(dif, jug1)
@@ -16,22 +16,21 @@ class Juego
     @mod = mod
   end
 
-  def turno # rubocop:disable Metrics/MethodLength
-    puts "**********\nTurno de #{@turno.nombre}**********"
-    breaker = true
-    while breaker
-      if @mod == 2 && @turno == @jugador2
-        breaker = false if @turno.disparar_ia(@noturno)
-      elsif @turno.disparar(@noturno)
-        breaker = false
-      end
-    end
-    revisar_jugador
-    return unless vivo
-
-    @noturno.obtener_tablero
-    terminar_turno
-  end
+  #def turno # rubocop:disable Metrics/MethodLength
+  #  breaker = true
+  #  while breaker
+  #    if @mod == 2 && @turno == @jugador2
+  #      breaker = false if @turno.disparar_ia(@noturno)
+  #    elsif @turno.disparar(@noturno)
+  #      breaker = false
+  #    end
+  #  end
+  #  revisar_jugador
+  #  return unless vivo
+#
+  #  @noturno.obtener_tablero
+  #  terminar_turno
+  #end
 
   def terminar_turno
     if @turno == @jugador1
@@ -52,8 +51,6 @@ class Juego
   end
 
   def terminar_juego
-    puts '**********El juego a terminado**********'
-    puts "********El ganador es #{@turno.nombre}!********"
     @vivo = false
   end
 end

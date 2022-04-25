@@ -2,7 +2,7 @@
 
 # Clase que modela los barcos del juego
 class Barco
-  attr_accessor :largo, :casillas, :vivo
+  attr_accessor :largo, :casillas, :vivo, :vida
 
   def initialize(largo)
     @largo = largo
@@ -13,10 +13,9 @@ class Barco
 
   def recibir_disparo
     @vida -= 1
-    return unless @vida.zero?
+    return unless @vida == 0
 
     @vivo = false
-    puts '**********BARCO HUNDIDO!**********'
   end
 
   def revisar_disparo(fil, col)
