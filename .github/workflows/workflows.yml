@@ -1,3 +1,6 @@
+env:
+  RUBY_VERSION: 3.0
+
 name: CI
 
 on:
@@ -28,15 +31,6 @@ jobs:
     name: RSpec
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:latest
-        ports:
-        - 5432:5432
-        env:
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -48,9 +42,9 @@ jobs:
 
       - name: Install Rspec
         run: gem install rspec
-      
+
       - name: Install Simplecov
         run: gem install simplecov
-
+      
       - name: Run barco test
-        run: rspec ./spec/barco_test.rb
+        run: rspec ./spec/barco_test.rb 
