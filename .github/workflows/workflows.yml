@@ -47,4 +47,10 @@ jobs:
         run: gem install simplecov
       
       - name: Run barco test
-        run: rspec ./spec/barco_test.rb 
+        run: rspec ./spec/barco_test.rb
+
+      - name: Run jugador test
+        run: rspec ./spec/jugador_test.rb 
+
+      - name: Run tablero test
+        run: rspec ./spec/tablero_test.rb 
