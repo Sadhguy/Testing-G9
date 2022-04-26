@@ -24,4 +24,4 @@
 
 
 ## Tests
-     *Para ejecutar los tests correr el comando rspec spec path_del_test
+     Para ejecutar los tests correr el comando rspec spec path_del_test
