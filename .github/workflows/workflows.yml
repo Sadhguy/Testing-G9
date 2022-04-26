@@ -53,4 +53,7 @@ jobs:
         run: rspec ./spec/jugador_test.rb 
 
       - name: Run tablero test
-        run: rspec ./spec/tablero_test.rb 
+        run: rspec ./spec/tablero_test.rb
+
+      - name: Run juego test
+        run: rspec ./spec/juego_test.rb 
