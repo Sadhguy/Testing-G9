@@ -21,3 +21,7 @@
 4) AbcSize - cantidad de metodos ABC era demasiado baja para el correcto funcionamiento del programa
 5) NumericPredicate - se deshabilita porque no incluia comparación con string y no permitía el funcionamiento del programa
 6) Perceived  Complexity - complejidad propuesta por Rubocop era muy baja.
+
+
+## Tests
+     *Para ejecutar los tests correr el comando rspec spec path_del_test
