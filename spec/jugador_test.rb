@@ -119,16 +119,16 @@ describe Jugador do # rubocop:disable Metrics/BlockLength
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A0A2', 'B0B2', 'C0C4')
       jugador_disparado.colocar_barcos
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A0')
-      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([false, 0, 0, 0])
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([false, 0, 0])
       expect do
         jugador_disparar.disparar(jugador_disparado)
       end.to output(a_string_including(secuencia_reintente)).to_stdout
-      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0, 1])
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 1])
       expect do
         jugador_disparar.disparar(jugador_disparado)
       end.to output(a_string_including(secuencia_fuego)).to_stdout
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A6')
-      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0, 0])
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0])
       expect do
         jugador_disparar.disparar(jugador_disparado)
       end.to output(a_string_including(secuencia_agua)).to_stdout
@@ -141,11 +141,11 @@ describe Jugador do # rubocop:disable Metrics/BlockLength
       jugador_disparado_ia = Jugador.new(dif, nombre)
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A0A2', 'B0B2', 'C0C4')
       jugador_disparado_ia.colocar_barcos
-      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0, 0])
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0])
       expect do
         jugador_disparar_ia.disparar_ia(jugador_disparado_ia)
       end.to output(a_string_including(secuencia_agua)).to_stdout
-      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0, 1])
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 1])
       expect do
         jugador_disparar_ia.disparar_ia(jugador_disparado_ia)
       end.to output(a_string_including(secuencia_fuego)).to_stdout
