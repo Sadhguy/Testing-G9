@@ -32,6 +32,8 @@ class Jugador # rubocop:disable Metrics/ClassLength
     while colocados < @cant_barcos
       puts "Barco #{colocados} => largo #{@largo_barcos[colocados]}"
       puts 'Desde y hasta qué casilla quieres poner este barco (Ej: A2A5):'
+      puts 'Ten en consideracion que la primera coordenada (ej: A2) sera el punto de origen de tu barco'
+      puts 'y la segunda coordenada (ej: A5) sera hacia donde quedara orientado tu barco'
       cas = gets
       cas_norm = normalizar_coordenadas_barcos(cas)
       respuesta = @tablero_privado.revisar_para_barcos(cas_norm[0], cas_norm[1], cas_norm[2], cas_norm[3], \
