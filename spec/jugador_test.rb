@@ -56,15 +56,15 @@ describe Jugador do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  context 'Probando la inicialización de barcos' do
-    it 'should initialize all Barcos' do
-      jugador_barcos = Jugador.new(dif, nombre)
-      jugador_barcos.inicializar_barcos
-      expect(jugador_barcos.barcos[0].largo).to eq largo1
-      expect(jugador_barcos.barcos[1].largo).to eq largo2
-      expect(jugador_barcos.barcos[2].largo).to eq largo3
-    end
-  end
+  # context 'Probando la inicialización de barcos' do
+  #   it 'should initialize all Barcos' do
+  #     jugador_barcos = Jugador.new(dif, nombre)
+  #     jugador_barcos.inicializar_barcos
+  #     expect(jugador_barcos.barcos[0].largo).to eq largo1
+  #     expect(jugador_barcos.barcos[1].largo).to eq largo2
+  #     expect(jugador_barcos.barcos[2].largo).to eq largo3
+  #   end
+  # end
 
   context 'Probando la colocación de barcos' do
     it 'should place all Barcos' do
