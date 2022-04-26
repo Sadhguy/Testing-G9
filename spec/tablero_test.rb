@@ -18,23 +18,13 @@ casillas = [
   ['6', 0, 0, 0, 0, 0, 0, 0]
 ]
 
-secuencia_disparo_acertado = '**********FUEGO!**********
-'
-
-secuencia_disparo_erroneo = '**********AGUA!**********
-'
-
 secuencia_de_inputs = %w[A0A8 A0A2 A0A2 B0B2 C0C4]
 
 secuencia_largos_barcos = [9, 3, 3, 3, 5]
 total_inputs = 5
 
-secuencia_de_checkeo = 'Casilla invalida
-No es posible colocar el barco en esa posición
-'
-
 describe Tablero do # rubocop:disable Metrics/BlockLength
-  context 'Probando la inicialiazción del tablero' do
+  context 'Probando la inicialización del tablero' do
     it 'should match Tablero attributes' do
       tablero = Tablero.new(lado)
       expect(tablero.lado).to eq lado
@@ -83,15 +73,11 @@ describe Tablero do # rubocop:disable Metrics/BlockLength
       (1..(tablero.lado)).each do |x|
         (0..(tablero.lado - 1)).each do |y|
           if tablero.casillas[x][y + 1] == 0
-            expect do
-              tablero.revisar_casilla(tablero.casillas[x][0], tablero.casillas[0][y])
-            end.to output(secuencia_disparo_erroneo).to_stdout
+            expect(tablero.revisar_casilla(tablero.casillas[x][0], tablero.casillas[0][y])[2]).to eq 0
           end
           next unless tablero.casillas[x][y + 1] == '#'
 
-          expect do
-            tablero.revisar_casilla(tablero.casillas[x][0], tablero.casillas[0][y])
-          end.to output(secuencia_disparo_acertado).to_stdout
+          expect(tablero.revisar_casilla(tablero.casillas[x][0], tablero.casillas[0][y])[2]).to eq 1
         end
       end
     end
@@ -100,17 +86,25 @@ describe Tablero do # rubocop:disable Metrics/BlockLength
   context 'Probando la posibilidad de colocación de barco' do
     it 'should check if possible' do
       tablero = Tablero.new(lado)
-      expect do
-        (0..(total_inputs - 1)).each do |i|
-          tablero.revisar_para_barcos(
-            secuencia_de_inputs[i][0],
-            secuencia_de_inputs[i][1],
-            secuencia_de_inputs[i][2],
-            secuencia_de_inputs[i][3],
-            secuencia_largos_barcos[i]
-          )
+      (0..(total_inputs - 1)).each do |i|
+        response = tablero.revisar_para_barcos(
+          secuencia_de_inputs[i][0],
+          secuencia_de_inputs[i][1],
+          secuencia_de_inputs[i][2],
+          secuencia_de_inputs[i][3],
+          secuencia_largos_barcos[i]
+        )[1]
+        next unless response[0]
+
+        case response[1]
+        when 0
+          expect(response[1]).to eq 0
+        when 1
+          expect(reponse[1]).to eq 1
+        when 2
+          expect(response[1]).to eq 2
         end
-      end.to output(secuencia_de_checkeo).to_stdout
+      end
     end
   end
 end

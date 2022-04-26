@@ -26,10 +26,7 @@ describe Barco do # rubocop:disable Metrics/BlockLength
       barco_disparado.recibir_disparo
       barco_disparado.recibir_disparo
       barco_disparado.recibir_disparo
-      expect do
-        barco_disparado.recibir_disparo
-      end.to output('**********BARCO HUNDIDO!**********
-').to_stdout
+      expect(barco_disparado.recibir_disparo).to eq true
       expect(barco_disparado.vivo).to eq false
     end
   end

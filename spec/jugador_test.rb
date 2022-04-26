@@ -73,18 +73,6 @@ secuencia_obtencion_tablero = '**********
 Tablero de Juan**********
 '
 
-secuencia_disparo_acertado = '**********FUEGO!**********
-'
-
-secuencia_disparo_erroneo = '**********AGUA!**********
-'
-
-secuencia_no_disponible = 'Casilla no disponible
-'
-
-secuencia_disparo = '**********
-'
-
 describe Jugador do # rubocop:disable Metrics/BlockLength
   context 'Probando la creación de jugador' do
     it 'should match Jugador attributes' do
@@ -157,16 +145,10 @@ describe Jugador do # rubocop:disable Metrics/BlockLength
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A0A2', 'B0B2', 'C0C4')
       jugador_disparado.colocar_barcos
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A0')
-      expect do
-        jugador_disparar.disparar(jugador_disparado)
-      end.to output(a_string_including(secuencia_disparo_acertado)).to_stdout
+      expect(jugador_disparar.disparar(jugador_disparado)).to eq true
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A6')
-      expect do
-        jugador_disparar.disparar(jugador_disparado)
-      end.to output(a_string_including(secuencia_disparo_erroneo)).to_stdout
-      expect do
-        jugador_disparar.disparar(jugador_disparado)
-      end.to output(a_string_including(secuencia_no_disponible)).to_stdout
+      expect(jugador_disparar.disparar(jugador_disparado)).to eq true
+      expect(jugador_disparar.disparar(jugador_disparado)).to eq false
     end
   end
 
@@ -176,9 +158,7 @@ describe Jugador do # rubocop:disable Metrics/BlockLength
       jugador_disparado_ia = Jugador.new(dif, nombre)
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A0A2', 'B0B2', 'C0C4')
       jugador_disparado_ia.colocar_barcos
-      expect do
-        jugador_disparar_ia.disparar_ia(jugador_disparado_ia)
-      end.to output(a_string_including(secuencia_disparo)).to_stdout
+      expect(jugador_disparar_ia.disparar_ia(jugador_disparado_ia)).to eq true || false
     end
   end
 end
