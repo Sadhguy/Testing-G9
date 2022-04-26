@@ -14,7 +14,7 @@ class Jugador # rubocop:disable Metrics/ClassLength
     @lado = difs[dif.to_i - 1]
     @tablero = Tablero.new(@lado)
     @tablero_privado = Tablero.new(@lado)
-    @cant_barcos = 3 * difs[dif.to_i - 1] / 7
+    @cant_barcos = 1 # 3 * difs[dif.to_i - 1] / 7
     @largo_barcos = barcs.take(@cant_barcos)
     inicializar_barcos
   end
@@ -33,7 +33,8 @@ class Jugador # rubocop:disable Metrics/ClassLength
       puts "Barco #{colocados} => largo #{@largo_barcos[colocados]}"
       puts 'Desde y hasta qué casilla quieres poner este barco (Ej: A2A5):'
       cas = gets
-      respuesta = @tablero_privado.revisar_para_barcos(cas[0], cas[1], cas[2], cas[3], \
+      cas_norm = normalizar_coordenadas_barcos(cas)
+      respuesta = @tablero_privado.revisar_para_barcos(cas_norm[0], cas_norm[1], cas_norm[2], cas_norm[3], \
                                                        @barcos[colocados].largo)
       if respuesta[0] == true
         @tablero_privado.print_tablero
@@ -62,7 +63,8 @@ class Jugador # rubocop:disable Metrics/ClassLength
       puts "Barco #{colocados} => largo #{@largo_barcos[colocados]}"
       puts 'Desde y hasta qué casilla quieres poner este barco (Ej: A2A5):'
       cas = random_coodinates(colocados)
-      respuesta = @tablero_privado.revisar_para_barcos(cas[0], cas[1], cas[2], cas[3],
+      cas_norm = normalizar_coordenadas_barcos(cas)
+      respuesta = @tablero_privado.revisar_para_barcos(cas_norm[0], cas_norm[1], cas_norm[2], cas_norm[3],
                                                        @barcos[colocados].largo)
       if respuesta[0] == true
         @tablero_privado.print_tablero
@@ -104,7 +106,8 @@ class Jugador # rubocop:disable Metrics/ClassLength
   def disparar(jugador) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     puts 'Inserte casilla a disparar (Ej: A0):'
     cas = gets
-    respuesta = jugador.tablero_privado.revisar_casilla(cas[1], cas[0])
+    cas_norm = normalizar_coordenadas_disparo(cas)
+    respuesta = jugador.tablero_privado.revisar_casilla(cas_norm[0], cas_norm[1])
     if respuesta[0]
       jugador.rectificar_tableros
       jugador.actualizar_barcos(respuesta[1][0], respuesta[1][1])
@@ -124,7 +127,8 @@ class Jugador # rubocop:disable Metrics/ClassLength
   def disparar_ia(jugador) # rubocop:disable  Metrics/MethodLength, Metrics/AbcSize
     puts 'Inserte casilla a disparar (Ej: A0):'
     cas = coordenada_de_disparo
-    respuesta = jugador.tablero_privado.revisar_casilla(cas[1], cas[0])
+    cas_norm = normalizar_coordenadas_disparo(cas)
+    respuesta = jugador.tablero_privado.revisar_casilla(cas_norm[0], cas_norm[1])
     puts 'Casilla no disponible' if respuesta[0] == false
     return unless respuesta[0]
 
@@ -151,5 +155,48 @@ class Jugador # rubocop:disable Metrics/ClassLength
       hundido = b.revisar_disparo(fil, col)
       puts '**********BARCO HUNDIDO!**********' if hundido == true
     end
+  end
+
+  def normalizar_coordenadas_disparo(coords)
+    fil = ''
+    col = ''
+    coords.each_char do |c|
+      if '0123456789'.include? c
+        fil += c
+      elsif 'abcdefghijklmnopqrstuvwxyz'.include? c.downcase
+        col = c
+      end
+    end
+    [fil, col]
+  end
+
+  def normalizar_coordenadas_barcos(coords) # rubocop:disable Metrics/MethodLength
+    fil1 = ''
+    fil2 = ''
+    col1 = ''
+    col2 = ''
+    ind = 0
+    puts coords
+    coords.each_char do |c|
+      if '0123456789'.include? c
+        if ind == 1
+          fil1 += c
+        else
+          fil2 += c
+        end
+      elsif 'abcdefghijklmnopqrstuvwxyz'.include? c.downcase
+        if ind.zero?
+          col1 = c
+        else
+          col2 = c
+        end
+        ind += 1
+      end
+    end
+    puts "FIL1 => #{fil1}"
+    puts "COL1 => #{col1}"
+    puts "FIL2 => #{fil2}"
+    puts "COL2 => #{col2}"
+    [col1, fil1, col2, fil2]
   end
 end
