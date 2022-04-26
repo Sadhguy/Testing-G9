@@ -108,7 +108,7 @@ class Jugador # rubocop:disable Metrics/ClassLength
     if respuesta[0]
       jugador.rectificar_tableros
       jugador.actualizar_barcos(respuesta[1][0], respuesta[1][1])
-      case respuesta[3]
+      case respuesta[2]
       when 0
         puts '**********AGUA!**********'
       when 1
@@ -128,7 +128,7 @@ class Jugador # rubocop:disable Metrics/ClassLength
     puts 'Casilla no disponible' if respuesta[0] == false
     return unless respuesta[0]
 
-    case respuesta[3]
+    case respuesta[2]
     when 0
       puts '**********AGUA!**********'
     when 1

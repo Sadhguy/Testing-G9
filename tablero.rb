@@ -86,8 +86,6 @@ class Tablero
       if fils == largo
         @casillas = tablero_provisional.casillas
         [true, cas]
-      else
-        [false, 1]
       end
     elsif fil1 == fil2
       cols = 0
@@ -102,8 +100,6 @@ class Tablero
       if cols == largo
         @casillas = tablero_provisional.casillas
         [true, cas]
-      else
-        [false, 1]
       end
     else
       [false, 2]
