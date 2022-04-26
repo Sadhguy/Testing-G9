@@ -74,8 +74,11 @@ class Tablero
     end
 
     if col1 == col2
+      return [false, 1] if largo > ((fil2 - fil1).abs + 1)
+
       fils = 0
       cas = []
+
       (0..(largo - 1)).each do |i|
         return [false, 1] unless (@casillas[fil1 + 1 + i][col1 + 1]) == 0 # rubocop:disable Style/NumericPredicate
 
