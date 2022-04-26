@@ -17,9 +17,9 @@ nombre = 'Juan'
 casillas = [%w[A B C D E F G], [0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0],
             [2, 0, 0, 0, 0, 0, 0, 0], [3, 0, 0, 0, 0, 0, 0, 0], [4, 0, 0, 0, 0, 0, 0, 0],
             [5, 0, 0, 0, 0, 0, 0, 0], [6, 0, 0, 0, 0, 0, 0, 0]]
-largo1 = 2
-largo2 = 3
-largo3 = 5
+# largo1 = 2
+# largo2 = 3
+# largo3 = 5
 
 secuencia_colocacion = '**********
 Turno de Juan**********
