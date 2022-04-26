@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Clase que modela el tablero
-class Tablero # rubocop:disable Metrics/ClassLength
+class Tablero
   attr_accessor :casillas, :lado, :letras
 
   def initialize(lado)
@@ -53,14 +53,11 @@ class Tablero # rubocop:disable Metrics/ClassLength
     case @casillas[f + 1][c + 1]
     when 0
       pintar_casilla(f + 1, c + 1, 2)
-      puts '**********AGUA!**********'
-      [true, [f + 1, c + 1]]
+      [true, [f + 1, c + 1], 0]
     when '#'
       pintar_casilla(f + 1, c + 1, 1)
-      puts '**********FUEGO!**********'
-      [true, [f + 1, c + 1]]
+      [true, [f + 1, c + 1], 1]
     else
-      puts 'Casilla no disponible'
       [false]
     end
   end
@@ -73,52 +70,43 @@ class Tablero # rubocop:disable Metrics/ClassLength
     tablero_provisional = self
     if !((0..(@lado - 1)).include?  col1) || !((0..(@lado - 1)).include? fil1) || \
        !((0..(@lado - 1)).include?  col2) || !((0..(@lado - 1)).include? fil2)
-      puts 'Casilla invalida'
-      return [false]
+      return [false, 0]
     end
+
     if col1 == col2
       fils = 0
       cas = []
       (0..(largo - 1)).each do |i|
-        if @casillas[fil1 + 1 + i][col1 + 1] == 0 # rubocop:disable Style/NumericPredicate
-          fils += 1
-          tablero_provisional.pintar_casilla(fil1 + 1 + i, col1 + 1, 3)
-          cas.push([fil1 + 1 + i, col1 + 1])
-        else
-          puts 'No es posible colocar el barco en esa posición'
-          return [false]
-        end
+        return [false, 1] unless (@casillas[fil1 + 1 + i][col1 + 1]) == 0 # rubocop:disable Style/NumericPredicate
+
+        fils += 1
+        tablero_provisional.pintar_casilla(fil1 + 1 + i, col1 + 1, 3)
+        cas.push([fil1 + 1 + i, col1 + 1])
       end
       if fils == largo
         @casillas = tablero_provisional.casillas
         [true, cas]
       else
-        puts 'No es posible colocar el barco en esa posición'
-        [false]
+        [false, 1]
       end
     elsif fil1 == fil2
       cols = 0
       cas = []
       (0..(largo - 1)).each do |i|
-        if @casillas[fil1 + 1][col1 + 1 + i] == 0 # rubocop:disable Style/NumericPredicate
-          cols += 1
-          tablero_provisional.pintar_casilla(fil1 + 1, col1 + 1 + i, 3)
-          cas.push([fil1 + 1, col1 + 1 + i])
-        else
-          puts 'No es posible colocar el barco en esa posición'
-          return [false]
-        end
+        return [false, 1] unless (@casillas[fil1 + 1][col1 + 1 + i]) == 0 # rubocop:disable Style/NumericPredicate
+
+        cols += 1
+        tablero_provisional.pintar_casilla(fil1 + 1, col1 + 1 + i, 3)
+        cas.push([fil1 + 1, col1 + 1 + i])
       end
       if cols == largo
         @casillas = tablero_provisional.casillas
         [true, cas]
       else
-        puts 'No es posible colocar el barco en esa posición'
-        [false]
+        [false, 1]
       end
     else
-      puts 'No puedes colocar los barcos de forma diagonal'
-      [false]
+      [false, 2]
     end
   end
 end

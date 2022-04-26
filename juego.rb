@@ -52,7 +52,7 @@ class Juego
   end
 
   def terminar_juego
-    puts '**********El juego a terminado**********'
+    puts '**********El juego ha terminado**********'
     puts "********El ganador es #{@turno.nombre}!********"
     @vivo = false
   end

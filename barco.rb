@@ -13,15 +13,15 @@ class Barco
 
   def recibir_disparo
     @vida -= 1
-    return unless @vida.zero?
+    return false unless @vida == 0 # rubocop:disable Style/NumericPredicate
 
     @vivo = false
-    puts '**********BARCO HUNDIDO!**********'
+    true
   end
 
   def revisar_disparo(fil, col)
     (0..(@largo - 1)).each do |c|
-      recibir_disparo if (fil == @casillas[c][0]) && (col == @casillas[c][1])
+      return recibir_disparo if (fil == @casillas[c][0]) && (col == @casillas[c][1])
     end
   end
 end
