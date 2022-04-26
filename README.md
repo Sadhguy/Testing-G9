@@ -5,5 +5,6 @@
 ## Instalación
 1) Clonar repositorio
 2) Entrar a la carpeta del repositorio
-3) Correr ruby main.rb
+3) Correr ruby main.rb:
+      - Seguir instrucciones que aparecen en consola
 4) Disfrutar
