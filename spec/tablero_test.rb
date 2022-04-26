@@ -18,10 +18,19 @@ casillas = [
   ['6', 0, 0, 0, 0, 0, 0, 0]
 ]
 
-secuencia_de_inputs = %w[A0A8 A0A2 A0A2 B0B2 C0C4]
+casillas_tablero = '["A", "B", "C", "D", "E", "F", "G"]
+[0, 0, 0, 0, 0, 0, 0, 0]
+[1, 0, 0, 0, 0, 0, 0, 0]
+[2, 0, 0, 0, 0, 0, 0, 0]
+[3, 0, 0, 0, 0, 0, 0, 0]
+[4, 0, 0, 0, 0, 0, 0, 0]
+[5, 0, 0, 0, 0, 0, 0, 0]
+[6, 0, 0, 0, 0, 0, 0, 0]
+'
 
-secuencia_largos_barcos = [9, 3, 3, 3, 5]
-total_inputs = 5
+secuencia_de_inputs = %w[B0B8 A0A2 A0A2 A0A2 A2B2 D0E1 D0F0 A0C0]
+secuencia_largos_barcos = [9, 4, 3, 3, 2, 2, 4, 3]
+total_inputs = 8
 
 describe Tablero do # rubocop:disable Metrics/BlockLength
   context 'Probando la inicialización del tablero' do
@@ -66,6 +75,19 @@ describe Tablero do # rubocop:disable Metrics/BlockLength
     end
   end
 
+  context 'Probando retornos de eventos en el tablero' do
+    it 'should match Tablero event return' do
+      tablero = Tablero.new(lado)
+      tablero.crear_tablero
+      tablero.pintar_casilla(1, 1, 1)
+      tablero.pintar_casilla(2, 2, 2)
+      tablero.pintar_casilla(3, 3, 3)
+      expect(tablero.revisar_casilla('2', 'A')[0]).to eq true
+      expect(tablero.revisar_casilla('3', 'P')[0]).to eq false
+      expect(tablero.revisar_casilla('4', 'C')[0]).to eq true
+    end
+  end
+
   context 'Probando los outputs de eventos en el tablero' do
     it 'should match Tablero output' do
       tablero = Tablero.new(7)
@@ -94,17 +116,22 @@ describe Tablero do # rubocop:disable Metrics/BlockLength
           secuencia_de_inputs[i][3],
           secuencia_largos_barcos[i]
         )[1]
-        next unless response[0]
-
-        case response[1]
-        when 0
-          expect(response[1]).to eq 0
-        when 1
-          expect(reponse[1]).to eq 1
-        when 2
-          expect(response[1]).to eq 2
+        case response[0]
+        when false
+          expect(response[1]).to eq 0 || 1 || 2
+        when true
+          expect(response[1]).not_to eq 0 || 1 || 2
         end
       end
+    end
+  end
+
+  context 'Probando la impresión de un tablero' do
+    it 'should macth Tablero casillas' do
+      tablero = Tablero.new(lado)
+      expect do
+        tablero.print_tablero
+      end.to output(casillas_tablero).to_stdout
     end
   end
 end
