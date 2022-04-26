@@ -5,7 +5,7 @@ require './jugador'
 
 # Clase que modela la logica del juego
 class Juego
-  attr_accessor :jugador1, :jugador2, :vivo
+  attr_accessor :jugador1, :jugador2, :vivo, :noturno
 
   def initialize(dif, jug1, jug2, mod)
     @jugador1 = Jugador.new(dif, jug1)
