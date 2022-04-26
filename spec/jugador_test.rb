@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-SimpleCov.start
+
+SimpleCov.profiles.define 'only_jugador_coverage' do
+  add_filter 'barco' # Don't include barco stuff
+  add_filter 'tablero' # Don't include tablero stuff
+end
+
+SimpleCov.start 'only_jugador_coverage'
 
 require './jugador'
 require './tablero'
@@ -17,48 +23,6 @@ largo3 = 5
 
 secuencia_colocacion = '**********
 Turno de Juan**********
-["A", "B", "C", "D", "E", "F", "G"]
-[0, 0, 0, 0, 0, 0, 0, 0]
-[1, 0, 0, 0, 0, 0, 0, 0]
-[2, 0, 0, 0, 0, 0, 0, 0]
-[3, 0, 0, 0, 0, 0, 0, 0]
-[4, 0, 0, 0, 0, 0, 0, 0]
-[5, 0, 0, 0, 0, 0, 0, 0]
-[6, 0, 0, 0, 0, 0, 0, 0]
-Barco 0 => largo 2
-Desde y hasta qué casilla quieres poner este barco (Ej: A2A5):
-["A", "B", "C", "D", "E", "F", "G"]
-[0, "#", 0, 0, 0, 0, 0, 0]
-[1, "#", 0, 0, 0, 0, 0, 0]
-[2, 0, 0, 0, 0, 0, 0, 0]
-[3, 0, 0, 0, 0, 0, 0, 0]
-[4, 0, 0, 0, 0, 0, 0, 0]
-[5, 0, 0, 0, 0, 0, 0, 0]
-[6, 0, 0, 0, 0, 0, 0, 0]
-Barco 1 => largo 3
-Desde y hasta qué casilla quieres poner este barco (Ej: A2A5):
-No es posible colocar el barco en esa posición
-Prueba nuevamente
-Barco 1 => largo 3
-Desde y hasta qué casilla quieres poner este barco (Ej: A2A5):
-["A", "B", "C", "D", "E", "F", "G"]
-[0, "#", "#", 0, 0, 0, 0, 0]
-[1, "#", "#", 0, 0, 0, 0, 0]
-[2, 0, "#", 0, 0, 0, 0, 0]
-[3, 0, 0, 0, 0, 0, 0, 0]
-[4, 0, 0, 0, 0, 0, 0, 0]
-[5, 0, 0, 0, 0, 0, 0, 0]
-[6, 0, 0, 0, 0, 0, 0, 0]
-Barco 2 => largo 5
-Desde y hasta qué casilla quieres poner este barco (Ej: A2A5):
-["A", "B", "C", "D", "E", "F", "G"]
-[0, "#", "#", "#", 0, 0, 0, 0]
-[1, "#", "#", "#", 0, 0, 0, 0]
-[2, 0, "#", "#", 0, 0, 0, 0]
-[3, 0, 0, "#", 0, 0, 0, 0]
-[4, 0, 0, "#", 0, 0, 0, 0]
-[5, 0, 0, 0, 0, 0, 0, 0]
-[6, 0, 0, 0, 0, 0, 0, 0]
 '
 
 secuencia_colocacion_ia = '**********
@@ -71,6 +35,16 @@ Me llamo inteligencia artificial pero soy bastante tontx
 
 secuencia_obtencion_tablero = '**********
 Tablero de Juan**********
+'
+
+secuencia_agua = '**********AGUA!**********
+'
+
+secuencia_fuego = '**********FUEGO!**********
+'
+
+secuencia_reintente = 'Inserte casilla a disparar (Ej: A0):
+Casilla no disponible
 '
 
 describe Jugador do # rubocop:disable Metrics/BlockLength
@@ -94,11 +68,11 @@ describe Jugador do # rubocop:disable Metrics/BlockLength
 
   context 'Probando la colocación de barcos' do
     it 'should place all Barcos' do
-      allow_any_instance_of(Kernel).to receive(:gets).and_return('A0A2', 'A0A2', 'B0B2', 'C0C4')
+      allow_any_instance_of(Kernel).to receive(:gets).and_return('A0A2', 'invalido', 'B0D2', 'A0A2', 'B0B2', 'C0C4')
       jugador_colocar_barcos = Jugador.new(dif, nombre)
       expect do
         jugador_colocar_barcos.colocar_barcos
-      end.to output(secuencia_colocacion).to_stdout
+      end.to output(a_string_including(secuencia_colocacion)).to_stdout
     end
   end
 
@@ -145,10 +119,19 @@ describe Jugador do # rubocop:disable Metrics/BlockLength
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A0A2', 'B0B2', 'C0C4')
       jugador_disparado.colocar_barcos
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A0')
-      expect(jugador_disparar.disparar(jugador_disparado)).to eq true
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([false, 0, 0, 0])
+      expect do
+        jugador_disparar.disparar(jugador_disparado)
+      end.to output(a_string_including(secuencia_reintente)).to_stdout
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0, 1])
+      expect do
+        jugador_disparar.disparar(jugador_disparado)
+      end.to output(a_string_including(secuencia_fuego)).to_stdout
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A6')
-      expect(jugador_disparar.disparar(jugador_disparado)).to eq true
-      expect(jugador_disparar.disparar(jugador_disparado)).to eq false
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0, 0])
+      expect do
+        jugador_disparar.disparar(jugador_disparado)
+      end.to output(a_string_including(secuencia_agua)).to_stdout
     end
   end
 
@@ -158,7 +141,14 @@ describe Jugador do # rubocop:disable Metrics/BlockLength
       jugador_disparado_ia = Jugador.new(dif, nombre)
       allow_any_instance_of(Kernel).to receive(:gets).and_return('A0A2', 'B0B2', 'C0C4')
       jugador_disparado_ia.colocar_barcos
-      expect(jugador_disparar_ia.disparar_ia(jugador_disparado_ia)).to eq true || false
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0, 0])
+      expect do
+        jugador_disparar_ia.disparar_ia(jugador_disparado_ia)
+      end.to output(a_string_including(secuencia_agua)).to_stdout
+      allow_any_instance_of(Tablero).to receive(:revisar_casilla).and_return([true, 0, 0, 1])
+      expect do
+        jugador_disparar_ia.disparar_ia(jugador_disparado_ia)
+      end.to output(a_string_including(secuencia_fuego)).to_stdout
     end
   end
 end

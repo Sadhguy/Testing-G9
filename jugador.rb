@@ -62,7 +62,7 @@ class Jugador # rubocop:disable Metrics/ClassLength
       puts "Barco #{colocados} => largo #{@largo_barcos[colocados]}"
       puts 'Desde y hasta qué casilla quieres poner este barco (Ej: A2A5):'
       cas = random_coodinates(colocados)
-      respuesta = @tablero_privado.revisar_para_barcos(cas[0], cas[1], cas[2], cas[3], \
+      respuesta = @tablero_privado.revisar_para_barcos(cas[0], cas[1], cas[2], cas[3],
                                                        @barcos[colocados].largo)
       if respuesta[0] == true
         @tablero_privado.print_tablero
@@ -76,7 +76,7 @@ class Jugador # rubocop:disable Metrics/ClassLength
 
   def random_coodinates(colocados) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     randcol = ('A'..'Z').to_a
-    randc = rand(@lado - @barcos[colocados].largo - 1)
+    randc = rand(@lado + @barcos[colocados].largo - 1)
     randfil = rand(0..(@lado - @barcos[colocados].largo))
     randy = rand(2)
     if randy == 0 # rubocop:disable Style/NumericPredicate
