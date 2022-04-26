@@ -17,9 +17,10 @@ nombre = 'Juan'
 casillas = [%w[A B C D E F G], [0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0],
             [2, 0, 0, 0, 0, 0, 0, 0], [3, 0, 0, 0, 0, 0, 0, 0], [4, 0, 0, 0, 0, 0, 0, 0],
             [5, 0, 0, 0, 0, 0, 0, 0], [6, 0, 0, 0, 0, 0, 0, 0]]
-# largo1 = 2
-# largo2 = 3
-# largo3 = 5
+
+largo1 = 2
+largo2 = 3
+largo3 = 5
 
 secuencia_colocacion = '**********
 Turno de Juan**********
@@ -56,15 +57,15 @@ describe Jugador do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  # context 'Probando la inicialización de barcos' do
-  #   it 'should initialize all Barcos' do
-  #     jugador_barcos = Jugador.new(dif, nombre)
-  #     jugador_barcos.inicializar_barcos
-  #     expect(jugador_barcos.barcos[0].largo).to eq largo1
-  #     expect(jugador_barcos.barcos[1].largo).to eq largo2
-  #     expect(jugador_barcos.barcos[2].largo).to eq largo3
-  #   end
-  # end
+  context 'Probando la inicialización de barcos' do
+    it 'should initialize all Barcos' do
+      jugador_barcos = Jugador.new(dif, nombre)
+      jugador_barcos.inicializar_barcos
+      expect(jugador_barcos.barcos[0].largo).to eq largo1
+      expect(jugador_barcos.barcos[1].largo).to eq largo2
+      expect(jugador_barcos.barcos[2].largo).to eq largo3
+    end
+  end
 
   context 'Probando la colocación de barcos' do
     it 'should place all Barcos' do

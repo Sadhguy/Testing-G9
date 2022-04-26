@@ -14,7 +14,7 @@ class Jugador # rubocop:disable Metrics/ClassLength
     @lado = difs[dif.to_i - 1]
     @tablero = Tablero.new(@lado)
     @tablero_privado = Tablero.new(@lado)
-    @cant_barcos = 1 # 3 * difs[dif.to_i - 1] / 7
+    @cant_barcos = 3 * difs[dif.to_i - 1] / 7
     @largo_barcos = barcs.take(@cant_barcos)
     inicializar_barcos
   end
